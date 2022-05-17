@@ -1,21 +1,27 @@
 <?php
   require_once "StackClass.php";
 
-  session_start();
-
   $stack = new Stack();
 
-  if (isset($_POST['push'])) {
+  session_start();
+
+  if (isset($_SESSION['stack'])){
+     $stack = $_SESSION['stack'];
+  } else {
+     $_SESSION['stack'] = $stack;
+  } 
+
+  if (isset($_POST['push']) && !empty($_POST['push'])) {
     $_SESSION['operation'] = "push";
-    $stack->push($_POST['push']);  
+    $_SESSION['result'] = $stack->push((int)$_POST['push']);  
   }
 
-  if (isset($_POST['pop'])) {
+  if (isset($_POST['pop']) && !empty($_POST['pop'])) {
     $_SESSION['operation'] = "pop";
     $_SESSION['result'] = $stack->pop();
   }
 
-  if (isset($_POST['max'])) {
+  if (isset($_POST['max']) && !empty($_POST['max'])) {
     $_SESSION['operation'] = "max";
     $_SESSION['result'] = $stack->max();
   }
@@ -64,20 +70,18 @@
       <p>
         <label>Push something onto the Stack</label>
         <input type="text" name="push" id="push" />
+        <input type="submit" name="submit" id="submit" value="Push!" />
       </p>
-        
+
       <p>
         <label>Pop the Stack</label>
-        <input type="text" name="pop" id="pop" />
+        <input type="submit" name="pop" id="pop" value="Pop Stack!" />
       </p>
 
       <p>
         <label>Get the Max value in the Stack</label>
-        <input type="text" name="max" id="max" />
+        <input type="submit" name="max" id="max" value="Get Max!" />
       </p>
-
-      <input type="submit" name="submit" id="submit" value="submit" />
-      <input type="reset" name="reset" id="reset" value="reset" />      
     </fieldset>
   </form>
 </body>

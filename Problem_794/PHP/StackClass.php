@@ -3,24 +3,22 @@
   class Stack {
     private $elements = array();
 
-    public Stack() {}
-
     public function push($newElement) {
-      if (preg_match("/^\d+$/", $data)) {
-        array_push($newElement);
-        return "Success";  
+      if (!preg_match("/^\d+$/", $newElement)) {
+        return "False";
       } else {
-        return "Failure";
+        array_push($this->elements, $newElement);
+        return "Success";  
       }
     }
 
     public function pop() {
-      return array_pop($elements);
+      return array_pop($this->elements);
     }
 
     public function max() {
       $max = 0;
-      foreach ($elements as $e) {
+      foreach ($this->elements as $e) {
         if ($e > $max) {
           $max = $e;
         }
@@ -32,15 +30,18 @@
       $table = "<table><tr>
                     <th>Element Position</th>
                     <th>Element Value</th>
-                  </tr><tr>";
+                  </tr>";
       $count = 0;
       
-      foreach($elements as $e) {
+      foreach($this->elements as $e) {
+        $table .= "<tr>";
         $table .= "<td>{$count}</td>";
         $table .= "<td>{$e}</td>";
+        $table .= "</tr>";
       }
-    
-      $table .= "</tr></table>";
+      $table .= "</table>";
+      
+      echo "<p>{$table}</p>";
     }
   }
 
