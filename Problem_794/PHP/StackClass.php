@@ -6,15 +6,41 @@
     public Stack() {}
 
     public function push($newElement) {
-      // NOT IMPLEMENTED
+      if (preg_match("/^\d+$/", $data)) {
+        array_push($newElement);
+        return "Success";  
+      } else {
+        return "Failure";
+      }
     }
 
     public function pop() {
-      // NOT IMPLEMENTED
+      return array_pop($elements);
     }
 
     public function max() {
-      // NOT IMPLEMENTED
+      $max = 0;
+      foreach ($elements as $e) {
+        if ($e > $max) {
+          $max = $e;
+        }
+      }
+      return $max;
+    }
+
+    public function printTable() {
+      $table = "<table><tr>
+                    <th>Element Position</th>
+                    <th>Element Value</th>
+                  </tr><tr>";
+      $count = 0;
+      
+      foreach($elements as $e) {
+        $table .= "<td>{$count}</td>";
+        $table .= "<td>{$e}</td>";
+      }
+    
+      $table .= "</tr></table>";
     }
   }
 

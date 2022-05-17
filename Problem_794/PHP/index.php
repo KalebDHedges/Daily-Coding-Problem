@@ -1,3 +1,26 @@
+<?php
+  require_once "StackClass.php";
+
+  session_start();
+
+  $stack = new Stack();
+
+  if (isset($_POST['push'])) {
+    $_SESSION['operation'] = "push";
+    $stack->push($_POST['push']);  
+  }
+
+  if (isset($_POST['pop'])) {
+    $_SESSION['operation'] = "pop";
+    $_SESSION['result'] = $stack->pop();
+  }
+
+  if (isset($_POST['max'])) {
+    $_SESSION['operation'] = "max";
+    $_SESSION['result'] = $stack->max();
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +43,7 @@
 
   <?php
     echo "<h2>The Stack</h2>";
-    // Display the stack
+    $stack->printTable();
   ?>
 
   <hr />
@@ -28,7 +51,8 @@
   
   <?php
     echo "<h2>Operation Result</h2>";
-    // Diplay the result of the method
+    echo "<p>Operation chosen is: {$_SESSION['operation']}</p>";
+    echo "<p>Result of operation is: {$_SESSION['result']}</p>";
   ?>
 
   <hr />
