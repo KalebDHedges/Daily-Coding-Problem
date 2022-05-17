@@ -12,7 +12,6 @@ Asker: Amazon
 Languages:
   - Ada
   - PHP
-  - C#
   - C++
 
 ## Design
