@@ -1,7 +1,7 @@
 <?php
 
   class Stack {
-    private $elements;
+    private $elements = array();
 
     public Stack() {}
 
