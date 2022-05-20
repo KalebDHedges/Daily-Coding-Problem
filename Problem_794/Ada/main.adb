@@ -1,6 +1,7 @@
 with Ada.Containers; use Ada.Containers;
 with Ada.Containers.Vectors;
 with Ada.Text_IO; use Ada.Text_IO;
+with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
 
 procedure Main is
 	package Integer_Vector is new Ada.Containers.Vectors (Index_Type => Natural, Element_Type => Integer);
@@ -39,15 +40,38 @@ procedure Main is
 
 		return v;
 	end Max;
+
+	type Operation is (None, Push, Pop, Max, Quit);
+
+	Selection : Operation := None;
+	input : Integer;
 begin
-	Push(Stack, 1);
-	Push(Stack, 15);
-	Push(Stack, 33);
-	Push(Stack, 78);
-	Push(Stack, 123);
-	Push(Stack, 3);
-	Put("Max is: "); Put(Integer'Image(Max(Stack))); New_Line;
-	Put("Popping top of stack: "); Put(Integer'Image(Pop(Stack))); New_Line;
-	Put("Popping top of stack: "); Put(Integer'Image(Pop(Stack))); New_Line;
-	Put("Max is: "); Put(Integer'Image(Max(Stack))); New_Line;
+	while Selection /= Quit loop
+		New_Line; New_Line;
+		Put_Line("Please select an operation: ");
+		Put_Line("Enter either Push, Pop, Max, or Quit");
+		Selection := Operation'Value(Get_Line);
+		
+		case Selection is
+			when Push =>
+				New_Line;
+				Put("Please enter your value: ");
+				input := Integer'Value(Get_Line);
+				Push(Stack, input);
+				Selection := None;
+			when Pop =>
+				New_Line;
+				Put("Popped value is: "); Put(Integer'Image(Pop(Stack))); New_Line;
+				Selection := None;
+			when Max =>
+				New_Line;
+				Put("Max value is: "); Put(Integer'Image(Max(Stack))); New_Line;
+				Selection := None;
+			when Quit =>
+				Put_Line("Thank you!");
+			when others =>
+				Put_Line("Invalid input!");
+				Selection := None;
+		end case;
+	end loop;
 end Main;
