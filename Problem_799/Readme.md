@@ -10,3 +10,4 @@ Languages:
 - Ada
 - PHP
 - CPP
+- JS

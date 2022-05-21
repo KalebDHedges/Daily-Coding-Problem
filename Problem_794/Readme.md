@@ -13,6 +13,7 @@ Languages:
   - Ada
   - PHP
   - C++
+  - JS
 
 ## Design
 
